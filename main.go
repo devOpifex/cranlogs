@@ -31,4 +31,14 @@ func main() {
 	for i, v := range trending {
 		fmt.Printf("%v. %v: %v\n", i, v.Package, v.Increase)
 	}
+
+	daily, err := api.Daily("last-week", "echarts4r")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, v := range daily.Downloads {
+		fmt.Printf("%v: %v\n", v.Day, v.Downloads)
+	}
 }
