@@ -41,4 +41,12 @@ func main() {
 	for _, v := range daily.Downloads {
 		fmt.Printf("%v: %v\n", v.Day, v.Downloads)
 	}
+
+	total, err := api.Total("last-week", "echarts4r")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("%v: %v\n", total.Package, total.Downloads)
 }
