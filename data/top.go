@@ -20,11 +20,11 @@ type Top struct {
 	Downloads []TopDownload `json:"downloads"`
 }
 
-func (api *API) Top(period string, count int) (Top, error) {
+func GetTop(period string, count int) (Top, error) {
 	var data Top
 
 	acount := strconv.Itoa(count)
-	path := api.URL + "top/" + period + "/" + acount
+	path := URL + "top/" + period + "/" + acount
 
 	resp, err := http.Get(path)
 

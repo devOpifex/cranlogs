@@ -13,11 +13,11 @@ type Total struct {
 	Package   string `json:"package"`
 }
 
-func (api *API) Total(period, pkg string) (Total, error) {
+func GetTotal(period, pkg string) (Total, error) {
 	// weirdly the API returns an array of length 1
 	var total []Total
 
-	path := api.URL + "downloads/total/" + period + "/" + pkg
+	path := URL + "downloads/total/" + period + "/" + pkg
 
 	resp, err := http.Get(path)
 

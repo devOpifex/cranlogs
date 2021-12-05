@@ -18,11 +18,11 @@ type DailyDownload struct {
 	Downloads int    `json:"downloads"`
 }
 
-func (api *API) Daily(period, pkg string) (Daily, error) {
+func GetDaily(period, pkg string) (Daily, error) {
 	// weirdly the API returns an array of length 1
 	var daily []Daily
 
-	path := api.URL + "downloads/daily/" + period + "/" + pkg
+	path := URL + "downloads/daily/" + period + "/" + pkg
 
 	resp, err := http.Get(path)
 

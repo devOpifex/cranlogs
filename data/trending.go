@@ -13,10 +13,10 @@ type Trend struct {
 
 type Trending []Trend
 
-func (api *API) Trending() (Trending, error) {
+func GetTrending() (Trending, error) {
 	var trending Trending
 
-	path := api.URL + "trending/"
+	path := URL + "trending/"
 
 	resp, err := http.Get(path)
 

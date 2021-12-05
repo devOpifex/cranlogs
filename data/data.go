@@ -1,5 +1,3 @@
 package data
 
-type API struct {
-	URL string
-}
+var URL = "https://cranlogs.r-pkg.org/"
