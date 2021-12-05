@@ -1,4 +1,4 @@
-module github.com/devOpifex/go-cranlogs
+module github.com/devOpifex/cranlogs
 
 go 1.16
 

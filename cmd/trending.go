@@ -2,10 +2,11 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
-	"github.com/devOpifex/go-cranlogs/color"
-	"github.com/devOpifex/go-cranlogs/data"
+	"github.com/devOpifex/cranlogs/color"
+	"github.com/devOpifex/cranlogs/data"
 	"github.com/spf13/cobra"
 )
 
@@ -19,6 +20,7 @@ var trendingCmd = &cobra.Command{
 
 		if err != nil {
 			color.PrintError(err.Error())
+			os.Exit(0)
 		}
 
 		for _, v := range trending {
@@ -26,7 +28,7 @@ var trendingCmd = &cobra.Command{
 			if round {
 				increase = strings.Split(v.Increase, ".")[0]
 			}
-			fmt.Printf("%v: %v %v %v\n", v.Package, color.Green, increase, color.Reset)
+			fmt.Printf("%v: %v%v%v\n", v.Package, color.Green, increase, color.Reset)
 		}
 	},
 }
