@@ -30,7 +30,7 @@ var grandTotalCmd = &cobra.Command{
 			os.Exit(0)
 		}
 
-		fmt.Printf("%v %v %v:%v\n", color.Yellow, total.Package, color.Reset, total.Downloads)
+		fmt.Printf("%v %v%v:%v\n", color.Yellow, total.Package, color.Reset, total.Downloads)
 	},
 }
 
