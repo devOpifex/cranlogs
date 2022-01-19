@@ -44,5 +44,5 @@ func GetDaily(period, pkg string) (Daily, error) {
 		return Daily{}, err
 	}
 
-	return Daily{}, nil
+	return daily[0], nil
 }
