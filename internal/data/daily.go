@@ -27,7 +27,7 @@ func GetDaily(period, pkg string) (Daily, error) {
 	resp, err := http.Get(path)
 
 	if err != nil {
-		return daily[0], err
+		return Daily{}, err
 	}
 
 	defer resp.Body.Close()
@@ -35,14 +35,14 @@ func GetDaily(period, pkg string) (Daily, error) {
 	body, err := ioutil.ReadAll(resp.Body)
 
 	if err != nil {
-		return daily[0], err
+		return Daily{}, err
 	}
 
 	err = json.Unmarshal(body, &daily)
 
 	if err != nil {
-		return daily[0], err
+		return Daily{}, err
 	}
 
-	return daily[0], nil
+	return Daily{}, nil
 }
