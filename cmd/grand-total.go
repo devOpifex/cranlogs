@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/devOpifex/cranlogs/color"
-	"github.com/devOpifex/cranlogs/data"
+	"github.com/devOpifex/cranlogs/internal/color"
+	"github.com/devOpifex/cranlogs/internal/data"
 	"github.com/spf13/cobra"
 )
 
