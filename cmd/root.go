@@ -7,6 +7,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var printJson bool
+
 var rootCmd = &cobra.Command{
 	Use:   "Cranlogs",
 	Short: "Access the cranlogs API",
@@ -25,4 +27,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(newDailyCmd())
+	rootCmd.PersistentFlags().BoolVar(&printJson, "json", false, "output in json format")
 }
