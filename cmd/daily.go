@@ -1,9 +1,10 @@
 package cmd
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/devOpifex/cranlogs/internal/color"
 	"github.com/devOpifex/cranlogs/internal/data"
@@ -16,22 +17,29 @@ func daily(_ *cobra.Command, args []string) {
 	if len(args) == 0 {
 		log.Fatal("no package specified")
 	}
-	// TODO: this still has some issues in how its handled
-	// as if a specific package fails, it will cause the entire process to
-	// exit then. A different pattern could be to aggregate errors for
-	// failed packages, then print out successful ones, then at the end
-	// the error(s) for the failed ones
-	for _, pkg := range args {
-		daily, err := data.GetDaily(dailyPeriod, pkg)
-		if err != nil {
-			color.PrintError(err.Error())
-			// given an error should not exit with a 0 exit code
-			os.Exit(-1)
-		}
+	p, err := data.NewPeriod(dailyPeriod)
+	if err != nil {
+		log.Fatal(err)
+	}
+	dailyDls, err := data.GetDaily(p, args)
+	if err != nil {
+		log.Fatalf("error getting daily downloads: %s", err)
+	}
 
-		fmt.Printf("Package: %v %v %v\n", color.Yellow, daily.Package, color.Reset)
-		for _, v := range daily.Downloads {
-			fmt.Printf("%v%v%v: %v\n", color.Cyan, v.Day, color.Reset, v.Downloads)
+	if printJson {
+		var out bytes.Buffer
+		dailyBytes, err := json.Marshal(dailyDls)
+		if err != nil {
+			log.Fatalf("error marshalling daily downloads: %s", err)
+		}
+		json.Indent(&out, dailyBytes, "", "  ")
+		fmt.Println(out.String())
+	} else {
+		for _, d := range dailyDls {
+			fmt.Printf("Package: %v %v %v\n", color.Yellow, d.Package, color.Reset)
+			for _, v := range d.Downloads {
+				fmt.Printf("%v%v%v: %v\n", color.Cyan, v.Day, color.Reset, v.Downloads)
+			}
 		}
 	}
 }
