@@ -1,5 +1,10 @@
 project_name: cranlogs
 
+permissions:
+  contents: write
+  id-token: write
+  packages: write
+
 release:
   # in case there is an indicator for this in the tag e.g. v1.0.0-rc1
   # If set to true, will mark the release as not ready for production.
