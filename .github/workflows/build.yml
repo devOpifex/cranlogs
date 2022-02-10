@@ -52,12 +52,12 @@ jobs:
           file: ./coverage.txt
       - run: git diff
       - name: Install GoReleaser
-        if: startsWith(github.ref, 'refs/tags/v') ||  github.ref == 'refs/heads/main'
+        if: startsWith(github.ref, 'refs/tags/v') ||  github.ref == 'refs/heads/master'
         uses: goreleaser/goreleaser-action@v2
         with:
           install-only: true
       - name: goreleaser-release
-        if: startsWith(github.ref, 'refs/tags/v') ||  github.ref == 'refs/heads/main'
+        if: startsWith(github.ref, 'refs/tags/v') ||  github.ref == 'refs/heads/master'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FURY_TOKEN: ${{ secrets.FURY_TOKEN }}
@@ -68,7 +68,7 @@ jobs:
       DOCKER_CLI_EXPERIMENTAL: "enabled"
     needs:
       - goreleaser
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     strategy:
       matrix:
         format: [ deb, rpm, apk ]
