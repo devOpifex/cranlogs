@@ -1,7 +1,7 @@
 # cranlogs
 
-Access [cranlogs](https://cranlogs.r-pkg.org/) from the command
-line.
+Access [cranlogs](https://cranlogs.r-pkg.org/) from the 
+command line.
 
 ## Install
 
