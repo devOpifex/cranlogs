@@ -1,0 +1,4 @@
+.task/
+coverage.txt
+cranlogs
+dist/
