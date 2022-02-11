@@ -8,7 +8,6 @@ import (
 )
 
 var printJson bool
-
 var rootCmd = &cobra.Command{
 	Use:   "Cranlogs",
 	Short: "Access the cranlogs API",
@@ -18,7 +17,9 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute() {
+func Execute(version string) {
+	rootCmd.Version = version
+	rootCmd.SetVersionTemplate(`{{printf "%s\n" .Version}}`)
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
